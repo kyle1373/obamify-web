@@ -51,8 +51,6 @@ npm run start   # serves the production build on port 3000
 Railway uses [Nixpacks](https://nixpacks.com/) to detect and build projects. The repo includes a `nixpacks.toml` that ensures the builder image installs Node.js 20, `rustup`, the `wasm32-unknown-unknown` target, and `trunk` before it runs `npm run build`. The relevant phases are:
 
 ```toml
-providers = ["nodejs"]
-
 [phases.setup]
 nixPkgs = ["nodejs_20", "rustup", ...]
 

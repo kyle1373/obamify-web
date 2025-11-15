@@ -76,7 +76,6 @@ To deploy:
 1. Install the [Railway CLI](https://docs.railway.app/develop/cli) and run `railway login`.
 2. Inside this repo run `railway up` (or create a project in the dashboard and connect the GitHub repo). Railway will honor `nixpacks.toml`, run the commands above, and then launch `npm run start`. `next start` automatically binds to the `PORT` Railway provides, so no extra flags are required.
 3. The generated WASM artifacts live in `public/wasm` during the build, so the deployed container can serve them directly without extra storage configuration.
-4. Railway’s auto-detection still attempts an early `cargo build`. To keep that stage from using an ancient system toolchain, the repo includes `bin/cargo`, a tiny shim that no-ops until `rustup` installs the real Cargo binary. This shim transparently delegates to `$HOME/.cargo/bin/cargo` once the install phase finishes, so `trunk` (and local development) continue to work normally.
 
 # Native installations
 

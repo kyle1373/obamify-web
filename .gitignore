@@ -13,8 +13,3 @@ target_wasm
 .lycheecache
 
 .vscode/*
-
-# Next.js artifacts
-node_modules
-.next
-public/wasm

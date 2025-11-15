@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 
-const WASM_SCRIPT_PATH: string = '/wasm/obamify.js';
 const WASM_BINARY_PATH = '/wasm/obamify_bg.wasm';
 
 export default function HomePage() {
@@ -16,7 +15,7 @@ export default function HomePage() {
       }
 
       try {
-        const wasmModule = (await import(/* webpackIgnore: true */ WASM_SCRIPT_PATH)) as {
+        const wasmModule = (await import(/* webpackIgnore: true */ '/wasm/obamify.js')) as {
           default?: (wasmUrl?: string) => Promise<unknown>;
         };
 

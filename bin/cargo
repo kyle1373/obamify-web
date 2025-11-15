@@ -1,0 +1,7 @@
+#!/bin/sh
+REAL_CARGO="$HOME/.cargo/bin/cargo"
+if [ -x "$REAL_CARGO" ]; then
+  exec "$REAL_CARGO" "$@"
+fi
+printf '[railway] cargo stub: skipping %s until rustup installs real cargo\n' "$0 $*" >&2
+exit 0

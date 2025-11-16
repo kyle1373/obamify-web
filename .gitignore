@@ -9,6 +9,13 @@ target
 target_ra
 target_wasm
 
+# Node/Next artifacts
+node_modules
+node_modules/*
+.next
+.next/*
+tsconfig.tsbuildinfo
+
 # https://github.com/lycheeverse/lychee
 .lycheecache
 

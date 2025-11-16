@@ -1,0 +1,10 @@
+{
+  "presets": [
+    { "id": "cat", "label": "Cat" },
+    { "id": "cat2", "label": "Cat 2" },
+    { "id": "colorful", "label": "Colorful" },
+    { "id": "blackhole", "label": "Black Hole" },
+    { "id": "wisetree", "label": "Wise Tree" }
+  ]
+}
+

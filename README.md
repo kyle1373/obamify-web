@@ -1,38 +1,71 @@
-[(try it here)](https://obamify.com/)
-# obamify
-revolutionary new technology that turns any image into obama
+![Obamify demo](example.gif)
 
-![example](example.gif)
+# Obamify · Next.js Edition
 
-# How to use
+This repo now houses a native Next.js 15 + React + Tailwind experience that reimplements the original Rust-based **obamify** algorithms entirely in TypeScript. The UI runs completely locally: heavy assignment solvers live inside browser workers, presets are fetched from `/public`, and results can be saved to IndexedDB or exported as GIFs without ever touching a server.
 
-**Use the ui at the top of the window to control the animation, choose between saved transformations, and generate new ones.** You can change the source image and target image, and choose how they are cropped to a square (tip: if both the images are faces, try making the eyes overlap). You can also change these advanced settings:
-| Setting               | Description                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| resolution            | How many cells the images will be divided into. Higher resolution will capture more high frequency details. |
-| proximity importance  | How much the algorithm changes the original image to make it look like the target image. Increase this if you want a more subtle transformation. |
-| algorithm             | The algorithm used to calculate the assignment of each pixel. Optimal will find the mathematically optimal solution, but is extremely slow for high resolutions. |
+## Key features
 
-# Installations
+- ✅ Fully client-side Hungarian + genetic solvers translated from the Rust codebase
+- ✅ Drawing-mode refinement worker plus local morph simulation for playback
+- ✅ GIF export powered by `gif-encoder-2`
+- ✅ Persistent preset store (IndexedDB) for custom creations
+- ✅ Vitest-covered heuristics & simulation helpers
 
-Install the latest version in [releases](https://github.com/Spu7Nix/obamify/releases). Unzip and run the .exe file inside!
-**Note for macOS users:**
-Run 'xattr -C <path/to/app.app>' in your terminal to remove the damaged app warning. 
-### Building from source
+## Getting started
 
-1. Install [Rust](https://www.rust-lang.org/tools/install)
-2. Run `cargo run --release` in the project folder
+```bash
+npm install
+npm run dev
+```
 
-#### Running the web version locally
-1. Install [Rust](https://www.rust-lang.org/tools/install)
-2. Install the required target with `rustup target add wasm32-unknown-unknown`
-3. Install Trunk with `cargo install --locked trunk`
-4. Run `trunk serve --release --open`
+The dev server runs on [http://localhost:3000](http://localhost:3000) using the Next.js App Router. The UI surface includes:
 
-# Contributing
+- **Preset library** – choose the bundled transformations or load your saved ones
+- **Custom uploads** – drop any square-ish image to obamify it locally
+- **Generation controls** – resolution, proximity importance, and algorithm selection
+- **Live preview + simulation canvas** – watch the morph simulation evolve in real time
+- **Local persistence** – save presets to IndexedDB for later reuse
+- **GIF exporter** – capture the running simulation into a downloadable GIF
 
-Please open an issue or a pull request if you have any suggestions or find any bugs :)
+## Available scripts
 
-# How it works
+| Script          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `npm run dev`   | Start Next.js in development mode                     |
+| `npm run build` | Production build of the Next.js app                   |
+| `npm run start` | Serve the production build                            |
+| `npm run lint`  | Run `next lint` (requires ESLint 9-compatible runtime)|
+| `npm run test`  | Execute Vitest (jsdom environment)                    |
 
-magic
+> **Note:** `next lint` currently emits warnings about experimental ESLint integration. Tests and type checking (`npx tsc --noEmit`) pass cleanly.
+
+## Project layout
+
+- `app/` – App Router layout + main React UI
+- `components/SimulationCanvas.tsx` – canvas renderer driven by the translated morph simulation
+- `lib/domain` – Generation settings, preset loaders, and serialization helpers
+- `lib/algorithms` – Hungarian solver, genetic/drawing swaps, morph simulation, GIF recorder
+- `lib/hooks` – Worker management hooks for the UI
+- `workers/` – Dedicated module workers (obamify + drawing refinement)
+- `public/presets` – Bundled example presets
+- `lib/storage` – IndexedDB helper for storing generated presets locally
+
+## Testing
+
+Vitest exercises the heuristic math and a subset of the simulation stack.
+
+```bash
+npm run test
+```
+
+Tests run with a lightweight `ImageData` polyfill; no network access is required.
+
+## Contributing
+
+1. Fork and branch from `main`
+2. Keep the UI entirely client-side (no API routes)
+3. Add Vitest coverage for any new algorithmic surface
+4. Submit a PR describing the change and manual verification steps
+
+Have fun obamifying! ✨

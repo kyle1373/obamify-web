@@ -18,7 +18,7 @@ interface Props {
   width?: number;
 }
 
-export function SimulationCanvas({ state, playing, width = 480 }: Props) {
+export function SimulationCanvas({ state, playing, width = 320 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {

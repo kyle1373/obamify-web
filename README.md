@@ -7,9 +7,9 @@ This repo now houses a native Next.js 15 + React + Tailwind experience that reim
 ## Key features
 
 - ✅ Fully client-side Hungarian + genetic solvers translated from the Rust codebase
-- ✅ Drawing-mode refinement worker plus local morph simulation for playback
-- ✅ GIF export powered by `gif-encoder-2`
-- ✅ Persistent preset store (IndexedDB) for custom creations
+- ✅ Single-photo “Turn it into Obama” workflow with one button
+- ✅ Live worker preview plus animated morph simulation view
+- ✅ No uploads or servers — everything runs in the browser
 - ✅ Vitest-covered heuristics & simulation helpers
 
 ## Getting started
@@ -19,14 +19,13 @@ npm install
 npm run dev
 ```
 
-The dev server runs on [http://localhost:3000](http://localhost:3000) using the Next.js App Router. The UI surface includes:
+The dev server runs on [http://localhost:3000](http://localhost:3000) using the Next.js App Router. The UI is intentionally minimal:
 
-- **Preset library** – choose the bundled transformations or load your saved ones
-- **Custom uploads** – drop any square-ish image to obamify it locally
-- **Generation controls** – resolution, proximity importance, and algorithm selection
-- **Live preview + simulation canvas** – watch the morph simulation evolve in real time
-- **Local persistence** – save presets to IndexedDB for later reuse
-- **GIF exporter** – capture the running simulation into a downloadable GIF
+1. Upload a single image (drag & drop or use the picker)
+2. Click **“Turn it into Obama”**
+3. Watch the low-res worker preview update, then the animated simulation kicks in automatically
+
+The resolution is capped at 96×96 by default to keep processing fast while still showing recognizable features.
 
 ## Available scripts
 
@@ -48,8 +47,7 @@ The dev server runs on [http://localhost:3000](http://localhost:3000) using the 
 - `lib/algorithms` – Hungarian solver, genetic/drawing swaps, morph simulation, GIF recorder
 - `lib/hooks` – Worker management hooks for the UI
 - `workers/` – Dedicated module workers (obamify + drawing refinement)
-- `public/presets` – Bundled example presets
-- `lib/storage` – IndexedDB helper for storing generated presets locally
+- `public/presets` – Bundled example presets and target assets
 
 ## Testing
 

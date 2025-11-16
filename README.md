@@ -39,6 +39,28 @@ The resolution is capped at 96×96 by default to keep processing fast while stil
 
 > **Note:** `next lint` currently emits warnings about experimental ESLint integration. Tests and type checking (`npx tsc --noEmit`) pass cleanly.
 
+## Deploying on Railway / Nixpacks
+
+Railway’s autodetector previously tried to compile the legacy Rust project. The repo now ships with a `nixpacks.toml` that forces a Node build:
+
+```toml
+providers = ["node"]
+
+[phases.setup]
+nixPkgs = ["nodejs_20", "pnpm-8_x"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"
+```
+
+Push the repo and deploy with the default Nixpacks builder – it will install Node 20, run the standard Next.js build, and start the production server on port 3000.
+
 ## Project layout
 
 - `app/` – App Router layout + main React UI
